@@ -1,35 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service';
-import { IPost } from '../IPosts';
-import { PostError } from './PostError';
+import { Component } from '@angular/core';
+import {FormGroup,FormControl} from '@angular/forms';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+@Component(
+{
+selector:'app-root',
+templateUrl:'./app.component.html'
+
 })
-export class AppComponent implements OnInit {
-  Posts:IPost[] |PostError;
-constructor(private dataService:DataService)
+
+
+export class AppComponent
 {
+
+  fo:FormGroup;
+
+  ngOnInit()
+  {
+    this.fo=new FormGroup(
+      {
+        firstName: new FormControl('FirstName'),
+        secondName:new FormControl('SecondName')
     
-}
+       });  
+    
+  }
 
-ngOnInit()
-{
-  this.dataService.getPosts()
-                  .subscribe( (data)=>{
-                    this.Posts=data
-                  },
-                  (error)=>{console.log(error.number),
-                  ()=>{console.log("completed")}});
-}
+  formSubmitted()
+  {
+    console.log(this.fo.value);
+    this.fo.patchValue({
+      firstName:"Manoj"
+    });
+  }
+  
 
-
-
-CreatePost()
-{
-  this.dataService.createPost()
-  .subscribe((data)=>console.log(data));
-}
 
 }

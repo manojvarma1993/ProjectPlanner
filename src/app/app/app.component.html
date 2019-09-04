@@ -1,7 +1,10 @@
-<div *ngFor="let post of Posts">
-  <h3>{{post.id}}</h3>
+<!-- <form [formGroup]="fo" (ngSubmit)="formSubmitted()">
+    <label>FirstName</label>
+    <input type="text" formControlName="firstName"/>
+    <label>SecondName</label>
+    <input type="text" formControlName="secondName"/>
+    <input type="submit"/>
 
-</div>
+</form> -->
 
-
-<button  (click)="CreatePost()">Create Posts</button>
+<router-outlet></router-outlet>

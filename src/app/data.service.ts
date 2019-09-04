@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError,tap,map} from 'rxjs/operators';
 import { IPost } from './IPosts';
 import { PostError } from './app/PostError';
-import { Observable,throwError } from 'rxjs';
-import { catchError,map} from 'rxjs/operators';
 
 @Injectable(
-  {
-  providedIn:'root'
-  })
+{
+providedIn:'root'
+})
 
 
-export class DataService
+
+export class DataService 
 {
 
 constructor(private http:HttpClient)
@@ -19,39 +20,37 @@ constructor(private http:HttpClient)
 
 }
 
-public  getPosts():Observable<IPost[]| PostError>
+
+getPosts():Observable<IPost[]|PostError>
 {
- return this.http.get<IPost[]>('https://jsonplaceholder.typicode.com/post')
-                  .pipe(catchError(err=>this.handleHttpErro(err)));
-                 
+  return this.http.get<IPost[]>('https://jsonplaceholder.typicode.com/posts')
+                  .pipe(catchError(err=>this.HandleError(err)));
 }
 
-
-public handleHttpErro(error:HttpErrorResponse):Observable<PostError>
+createPost():Observable<IPost[]|PostError>
 {
-  let postError=new PostError();
-  postError.errorNumber=20;
-  return throwError(postError);
-
-}
-
-public createPost():Observable<IPost>
-{
-  
-  return this.http.post<IPost>('https://jsonplaceholder.typicode.com/posts',
+  return this.http.post<IPost[]>('https://jsonplaceholder.typicode.com/posts',
   {
-    title:'foo',
-    body:'bar',
-    userId:1
+    title: 'foo',
+    body: 'bar',
+    userId: 1
   },
   {
-    headers:new HttpHeaders({
-      'Content-Type':'application/json'
-   })
-  });
+    headers:new HttpHeaders(
+    {
+     'content-type':'application/json'
+    })
+  }).pipe(catchError(err=>this.HandleError(err)));
 }
 
+   HandleError(err:HttpErrorResponse):Observable<PostError>
+   {
+   let postError=new PostError();
+   postError.errorNumber=800;
+   return throwError(postError);
+
+  }
+
+
+
 }
-
-
-
