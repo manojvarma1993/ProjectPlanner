@@ -1,4 +1,5 @@
-import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { } from '@angular/router'
 
 @Component({
   selector: 'app-first',
@@ -7,18 +8,12 @@ import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 })
 export class FirstComponent implements OnInit 
 {
-  @Input() p;
-  @Output() o=new EventEmitter();
+  ngOnInit()
+  {
 
-  constructor() { }
-
-  ngOnInit() {
   }
 
- LogBody()
- {
-   this.o.emit(this.p.body); 
- }
+
 
 
 }

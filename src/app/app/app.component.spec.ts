@@ -1,17 +1,17 @@
-// import {TestBed} from '@angular/core/testing';
-// import { HttpClientTestingModule,HttpTestingController } from '@angular/common/testing';
-// import { DataService } from '..data.service/';
+// import { TestBed } from '@angular/core/testing';
+// import { DataService } from '../data.service';
 
-// describe('Dataa Servoice should',()=>
+
+
+// describe("",())
+
+// beforeEach(()=>
 // {
-//   beforeEach(()=>
-//   {
+//     TestBed.configureTestingModule({
+//         imports:[HttpClientTestingModule],
+//         providers:[DataService]
+//     });
 
-//   });
-
-
-//   it(()=>
-//   {
-
-//   });
+//     data
 // })
+

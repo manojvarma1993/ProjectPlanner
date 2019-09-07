@@ -1,22 +1,20 @@
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
+import {AppComponent } from './app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app/app.component';
-import { DataService } from './data.service';
-import { FirstComponent } from './first/first.component';
-import { HttpClientModule } from '@angular/common/http';
-import { SecondComponent } from './second/second.component';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import {routes } from './routes';
+import { routes } from './routes';
+import { FirstComponent } from './first/first.component';
+import { SecondComponent } from './second/second.component';
 @NgModule(
 {
-imports:[BrowserModule,HttpClientModule,RouterModule.forRoot(routes),ReactiveFormsModule],
+imports:[BrowserModule,RouterModule.forRoot(routes)],
 exports:[],
-declarations:[AppComponent, FirstComponent, SecondComponent],
-providers:[DataService],
+declarations:[AppComponent,FirstComponent,SecondComponent],
+providers:[],
 bootstrap:[AppComponent]
-})
 
+
+})
 
 
 export class AppModule

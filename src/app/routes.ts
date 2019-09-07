@@ -1,15 +1,12 @@
-import {  Route } from '@angular/router';
+import { Route } from '@angular/router';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
-import { FeatureModule } from '../feature.module';
+import { FeatureModule } from '../Feature.module';
 
 
-export const routes:Route[]=
-[
+export const routes:Route[]=[
     {path:'first',component:FirstComponent},
     {path:'second',component:SecondComponent},
     {path:'test',redirectTo:'first',pathMatch:'full'},
-
-    {path:'nat',loadChildren:'../feature.module#FeatureModule'}
- 
+    {path:'feature',loadChildren:'../feature.module#FeatureModule'}
 ]
