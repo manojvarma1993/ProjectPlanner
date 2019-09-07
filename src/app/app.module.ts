@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PostService } from './data.service';
 @NgModule(
 {
-imports:[BrowserModule,RouterModule.forRoot(routes)],
+imports:[BrowserModule,HttpClientModule,RouterModule.forRoot(routes)],
 exports:[],
 declarations:[AppComponent,FirstComponent,SecondComponent],
-providers:[],
+providers:[PostService],
 bootstrap:[AppComponent]
 
 

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { } from '@angular/router'
+import { PostService } from '../data.service';
+import { post } from 'selenium-webdriver/http';
+import { IPost } from 'src/IProduct';
+import { PostError } from '../app/PostError';
 
 @Component({
   selector: 'app-first',
@@ -8,8 +11,22 @@ import { } from '@angular/router'
 })
 export class FirstComponent implements OnInit 
 {
+ post:any;
+constructor(private dataservice:PostService)
+{
+
+}
+
   ngOnInit()
   {
+   
+    this.dataservice.getPosts()
+                    .subscribe((data=>{
+                          this.post=data;
+                        }),
+                        (err=>console.log(err)),
+                        (()=>{console.log("completed")}));
+    
 
   }
 

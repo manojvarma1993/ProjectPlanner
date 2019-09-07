@@ -1,21 +1,15 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError,tap,map} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { IPost } from './IPosts';
-import { PostError } from './app/PostError';
+import { Observable, throwError } from 'rxjs';
+import { tap,catchError } from 'rxjs/operators';
+import { PostError } from '../app/app/PostError';
+@Injectable()
 
-@Injectable(
-{
-providedIn:'root'
-})
-
-
-
-export class DataService 
+export  class PostService
 {
 
-constructor(private http:HttpClient)
+constructor(private http: HttpClient)
 {
 
 }
@@ -24,33 +18,21 @@ constructor(private http:HttpClient)
 getPosts():Observable<IPost[]|PostError>
 {
   return this.http.get<IPost[]>('https://jsonplaceholder.typicode.com/posts')
-                  .pipe(catchError(err=>this.HandleError(err)));
+                  .pipe(
+                  catchError(err=>this.handleErr(err)),
+                  );
 }
-
-createPost():Observable<IPost[]|PostError>
-{
-  return this.http.post<IPost[]>('https://jsonplaceholder.typicode.com/posts',
+  handleErr(handleErr: any):Observable<PostError>
   {
-    title: 'foo',
-    body: 'bar',
-    userId: 1
-  },
-  {
-    headers:new HttpHeaders(
-    {
-     'content-type':'application/json'
-    })
-  }).pipe(catchError(err=>this.HandleError(err)));
-}
-
-   HandleError(err:HttpErrorResponse):Observable<PostError>
-   {
-   let postError=new PostError();
-   postError.errorNumber=800;
-   return throwError(postError);
+   let p=new PostError();
+   p.errorNumber=400;
+   return throwError(p);
 
   }
 
 
 
 }
+
+
+
