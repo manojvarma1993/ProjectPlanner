@@ -15,9 +15,9 @@ constructor(private http: HttpClient)
 }
 
 
-getPosts():Observable<IPost[]|PostError>
+getPosts(id:number):Observable<IPost[]|PostError>
 {
-  return this.http.get<IPost[]>('https://jsonplaceholder.typicode.com/posts')
+  return this.http.get<IPost[]>('https://jsonplaceholder.typicode.com/posts/${id}')
                   .pipe(
                   catchError(err=>this.handleErr(err)),
                   );
